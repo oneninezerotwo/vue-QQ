@@ -67,6 +67,9 @@ export default {
 
         window.addEventListener("scroll", this.handleScroll); //绑定滚轮事件
   },
+  destroyed(){
+     window.removeEventListener("scroll", this.handleScroll); //解绑滚轮事件
+  },
   methods: {
     dianji(index) {
       this.actives = index;
@@ -180,7 +183,6 @@ export default {
 .main ul li div div {
   flex: 1;
   margin-right: 0.024155rem;
-  background: yellowgreen;
 }
 .main ul li div div img{
   width: 100%;

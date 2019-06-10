@@ -45,7 +45,7 @@ export default {
       url:this.$store.state.url,
     };
   },
-  activated() {
+  created() {
     this.id1 = this.$route.query.id1; //接收路由跳转的值,自己
     this.id2 = this.$route.query.id2;
     //获取自己头像
@@ -92,7 +92,7 @@ export default {
         });
       });
   },
-  deactivated(){
+  destroyed(){
      this.time = new Date();
      var time2 =this.time.getFullYear() + "-" + (this.time.getMonth()*1 + 1) + "-" + this.time.getDate();
      this.$axios

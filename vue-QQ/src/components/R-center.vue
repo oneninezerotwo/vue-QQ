@@ -71,7 +71,7 @@ export default {
       text4: "登录",
       zhanghao: "",
       mima: "",
-      url:"http://10.3.146.136:1811/api/api.php"
+      url:this.$store.state.url,
     };
   },
 

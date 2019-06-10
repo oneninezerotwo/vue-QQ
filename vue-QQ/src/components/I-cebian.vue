@@ -84,7 +84,7 @@ export default {
     };
   },
 
-  activated() {
+  mounted() {
     this.bus.$on("xinxi", title => {
       this.class1.yundong = title;
     });
@@ -128,7 +128,7 @@ export default {
   height: 100%;
   background: rgb(246, 251, 255);
   position: fixed;
-  z-index: 10;
+  z-index: 40;
   transition: all 0.5s 0s;
   padding-left: 20%;
   box-sizing: border-box;

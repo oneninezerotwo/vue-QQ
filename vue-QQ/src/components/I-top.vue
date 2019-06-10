@@ -28,7 +28,7 @@ export default {
     };
   },
 
-  activated() {
+  mounted() {
     this.name = localStorage.getItem("name");
 
     var _this = this; //兄弟组件通信

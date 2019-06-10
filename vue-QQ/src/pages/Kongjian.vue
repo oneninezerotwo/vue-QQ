@@ -34,20 +34,20 @@
       <ul class="main">
         <li>
           <div class="m-top">
-            <div class="xiaoimg"><img src="../assets/touxiang.jpg" alt=""></div>
-            <h6 class="name">依山尽</h6>
-            <p class="time">今天07:50</p>
+            <div class="xiaoimg"><img :src="data.touxiang" alt=""></div>
+            <h6 class="name">{{data.name}}</h6>
+            <p class="time">今天{{data.time}}</p>
           </div>
           <div class="m-text">
-            <p>你个大傻屌啊</p>
+            <p>{{data.text}}</p>
             <div class="img">
-              <div></div>
-              <div></div>
-              <div></div>
+              <div><img :src="data.img1" alt=""></div>
+              <div><img :src="data.img2" alt=""></div>
+              <div><img :src="data.img3" alt=""></div>
             </div>
           </div>
           <div class="m-zan">
-            <span>浏览<i>28</i>次</span>
+            <span>浏览<i>{{data.liulan}}</i>次</span>
             <img v-for="(item,index) in imgz" :key="index" :src="item.imgs" alt="">
           </div>
           <div class="m-haoyou">
@@ -72,8 +72,9 @@ export default {
       text2:"今日访客",
       text3:"总访问量",
       text4:["相册","说说","个性化","小游戏","小视频",],
-      url: "http://10.3.146.136:1811/api/api.php",
+      url:this.$store.state.url,
       imgt: "",
+      data:[],
       imgk: [
         { imgs: require("../assets/k1.png") },
         { imgs: require("../assets/k2.png") },
@@ -97,9 +98,9 @@ export default {
       liimg:require("../assets/libao.jpg"),
     };
   },
-  beforeMount() {
-    console.log(this.$store.state.a);
+  mounted() {
     this.idj = localStorage.getItem("id"); //获取正在登录的账号
+    //渲染头像
     this.$axios
       .get(this.url, {
         params: {
@@ -113,6 +114,23 @@ export default {
       })
       .then(res => {
         this.imgt = res.data[0].img;
+      });
+
+      //渲染空间
+      this.$axios
+      .get(this.url, {
+        params: {
+          jiekou: "xuanran",
+          biao: "kongjian",
+          leixing: "ids",
+          mingcheng: this.idj,
+          tiao: 0,
+          tiao2: 300
+        }
+      })
+      .then(res => {
+        this.data=res.data[0];
+        console.log(this.data);
       });
   },
   methods: {
@@ -299,8 +317,12 @@ export default {
 }
 .main .m-text .img div{
   flex: 1;
-  background: turquoise;
   margin-left: .048309rem;
+  background: yellow;
+}
+.main .m-text .img div img{
+  width: 100%;
+  height: 100%;
 }
 .main .m-zan{
   width: 100%;
